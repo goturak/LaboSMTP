@@ -1,5 +1,6 @@
 package com.company.model;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  * Class representing a group of victims with a list of recipients and a sender
@@ -15,6 +16,8 @@ public class Group {
     }
 
     public Group() {
+        this.recipients= new ArrayList<Person>();
+
     }
 
     public void addRecipient(Person p){

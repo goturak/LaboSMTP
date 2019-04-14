@@ -15,8 +15,8 @@ public class Mail {
         this.from = from;
         this.to = to;
         this.subject = subject;
-        this.message=message;
-
+        this.message = message;
+    }
 
     public String getFrom() {
         return from;

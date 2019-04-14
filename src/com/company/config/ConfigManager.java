@@ -23,14 +23,14 @@ public final class ConfigManager {
     private int numberOfGroups;
 
     private ConfigManager() throws IOException {
-        persons = parseAdress("adresses.txt");
-        messages = parseMessages("messages.txt");
-        parseConfig("config.properties");
+        persons = parseAdress("./adresses.txt");
+        messages = parseMessages("./messages.txt");
+        parseConfig("./config.properties");
     }
 
-    public ConfigManager getInstance() throws IOException {
+    public static ConfigManager getInstance() throws IOException {
         if(instance == null){
-            this.instance = new ConfigManager();
+            ConfigManager.instance = new ConfigManager();
         }
         return instance;
     }
@@ -69,6 +69,7 @@ public final class ConfigManager {
 
         this.witnessesToCC = new ArrayList<>();
         String field = p.getProperty("witnessesToCC");
+
         String[] witnesses = field.split(",");
         for(String w : witnesses){
             this.witnessesToCC.add(new Person(w));
