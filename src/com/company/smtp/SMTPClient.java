@@ -13,11 +13,16 @@ public class SMTPClient {
     private PrintWriter out;
     private BufferedReader in;
 
-    public SMTPClient(String ip, int port) throws IOException {
-        clientSocket = new Socket(ip, port);
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        sendMessage("EHLO test");
+    public SMTPClient(String ip, int port)  {
+        try {
+            clientSocket = new Socket(ip, port);
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            sendMessage("EHLO test");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public String sendMessage(String msg) throws IOException {
@@ -33,7 +38,17 @@ public class SMTPClient {
         sendMessage("To: "+mail.getTo());
         sendMessage("subject: "+ mail.getSubject()+"\n\n"+mail.getMessage()+"\r\n.\r\n");
 
-
     }
 
+
+    public void disconnect() {
+        try {
+            in.close();
+            out.close();
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
