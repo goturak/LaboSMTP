@@ -31,6 +31,8 @@ public final class ConfigManager {
      * @throws IOException
      */
     private ConfigManager() throws IOException {
+
+    
         persons = parseAddress("./src/com/company/config/addresses.txt");
         List<String>[] subjectMessages = parseMessages("./src/com/company/config/messages.txt");
         subjects = subjectMessages[0];
@@ -123,6 +125,7 @@ public final class ConfigManager {
         //For every person (separated by a comma), we store a new person in the list.
         this.witnessesToCC = new ArrayList<>();
         String field = p.getProperty("witnessesToCC");
+
         String[] witnesses = field.split(",");
         for(String w : witnesses){
             this.witnessesToCC.add(new Person(w));
@@ -186,3 +189,4 @@ public final class ConfigManager {
         return result;
     }
 }
+

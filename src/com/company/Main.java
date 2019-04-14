@@ -1,23 +1,37 @@
 package com.company;
 
 
+import com.company.config.ConfigManager;
 import com.company.model.Mail;
 import com.company.model.Person;
+import com.company.model.Prank;
+import com.company.model.PrankGenerator;
 import com.company.smtp.SMTPClient;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        Person p1= new Person("dummy@gmail.com");
-        Person p2= new Person("dummy2@gmail.com");
-        Mail m= new Mail("dummy@gmail.com","dummy2@gmail.com", "nothing","pouet pouet");
-        try {
-            SMTPClient smtpClient= new SMTPClient("127.0.0.1",2525);
+        PrankGenerator pg=new PrankGenerator();
 
-            smtpClient.sendMail(m);
+        try {
+            ConfigManager cm= ConfigManager.getInstance();
+            SMTPClient smtpClient= new SMTPClient(cm.getSmtpServerAddress(),cm.getSmtpServerPort());
+            for(int i= 0; i < cm.getNumberOfGroups();i++){
+              Prank p= pg.generatePrank();
+
+              List<Mail> mails = p.generateMails();
+
+              for (Mail m:mails) {
+                smtpClient.sendMail(m);
+              }
+            System.out.println(mails.size());
+            }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

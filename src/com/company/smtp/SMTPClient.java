@@ -18,26 +18,41 @@ public class SMTPClient {
             clientSocket = new Socket(ip, port);
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            sendMessage("EHLO test");
+            sendMessage("EHLO test",true);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public String sendMessage(String msg) throws IOException {
-        out.println(msg);
-        String resp = in.readLine();
-        return resp;
-    }
-    public void sendMail(Mail mail) throws IOException {
-        sendMessage("MAIL FROM: "+mail.getFrom());
-        sendMessage("RCPT TO: "+mail.getTo());
-        sendMessage("DATA");
-        sendMessage("From: "+mail.getFrom());
-        sendMessage("To: "+mail.getTo());
-        sendMessage("subject: "+ mail.getSubject()+"\n\n"+mail.getMessage()+"\r\n.\r\n");
+    public String sendMessage(String msg,boolean waitForAnswer) throws IOException {
 
+        out.println(msg);
+        if(waitForAnswer) {
+            String resp = in.readLine();
+            return resp;
+        }else{
+            return null;
+        }
+    }
+    public void sendMail(Mail mail) throws IOException, InterruptedException {
+        System.out.println("new mail");
+        System.out.println(sendMessage("MAIL FROM: "+mail.getFrom(),true));
+        Thread.sleep(20);
+        System.out.println(sendMessage("RCPT TO: "+mail.getTo(),true));
+        Thread.sleep(20);
+        System.out.println(sendMessage("DATA",true));
+        Thread.sleep(20);
+        sendMessage("From: "+mail.getFrom(),false);
+        Thread.sleep(20);
+        sendMessage("To: "+mail.getTo(),false);
+        Thread.sleep(20);
+        sendMessage("subject: "+ mail.getSubject()+"\n\n"+mail.getMessage(),false);
+        Thread.sleep(20);
+        System.out.println(sendMessage("\r\n.\r\n",true));
+        Thread.sleep(20);
+        out.flush();
+        System.out.println("end of mail");
     }
 
 
