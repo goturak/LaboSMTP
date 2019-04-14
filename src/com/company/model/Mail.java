@@ -1,7 +1,5 @@
 package com.company.model;
 
-import javax.security.auth.Subject;
-
 /**
  * Class containing all the necessary informatrions to send the fake mail
  * @author Luca Reis de Carvalho -Guillaume Vetter
