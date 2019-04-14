@@ -7,37 +7,36 @@ package com.company.model;
 public class Mail {
     private String from;
     private String to;
-    private String data;
-    private String subject;
 
-    public Mail(String from, String to, String subject, String data) {
+    private String subject;
+    private String message;
+
+    public Mail(String from, String to, String subject, String message) {
         this.from = from;
         this.to = to;
-        this.data = data;
         this.subject = subject;
-    }
+        this.message=message;
+
 
     public String getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
-        from = from;
-    }
+
 
     public String getTo() {
         return to;
     }
 
-    public void setTo(String to) {
-        to = to;
+
+    public String getSubject() {
+        return subject;
     }
 
-    public String getData() {
-        return data;
+
+    public String getMessage() {
+        return message;
     }
 
-    public void setData(String data) {
-        data = data;
-    }
+
 }
