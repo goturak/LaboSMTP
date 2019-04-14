@@ -5,6 +5,7 @@ import com.company.model.Person;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * This class represent a parser for the config files, which create Adresses, Groups
@@ -13,11 +14,15 @@ import java.util.List;
 public class ConfigManager {
     private final List<Person> persons;
     private final List<String> messages;
+    private String smtpServerAddress;
+    private int smtpServerPort;
+    private ArrayList<Person> witnessesToCC;
+    private int numberOfGroups;
 
     public ConfigManager() throws IOException {
         persons = parseAdress("adresses.txt");
         messages = parseMessages("messages.txt");
-
+        parseConfig("config.properties");
     }
 
     public List<Person> getPersons() {
@@ -26,6 +31,39 @@ public class ConfigManager {
 
     public List<String> getMessages() {
         return messages;
+    }
+
+    public String getSmtpServerAddress() {
+        return smtpServerAddress;
+    }
+
+    public int getSmtpServerPort() {
+        return smtpServerPort;
+    }
+
+    public ArrayList<Person> getWitnessesToCC() {
+        return witnessesToCC;
+    }
+
+    public int getNumberOfGroups() {
+        return numberOfGroups;
+    }
+
+    private void parseConfig(String fileName) throws IOException{
+        FileInputStream stream = new FileInputStream(fileName);
+        Properties p = new Properties();
+        p.load(stream);
+        this.smtpServerAddress = p.getProperty("smtpServerAddress");
+        this.smtpServerPort = Integer.parseInt(p.getProperty("stmpServerPort"));
+        this.numberOfGroups = Integer.parseInt(p.getProperty("numberOfGroups"));
+
+        this.witnessesToCC = new ArrayList<>();
+        String field = p.getProperty("witnessesToCC");
+        String[] witnesses = field.split(",");
+        for(String w : witnesses){
+            this.witnessesToCC.add(new Person(w));
+        }
+
     }
 
     private List<Person> parseAdress(String fileName) throws IOException {
