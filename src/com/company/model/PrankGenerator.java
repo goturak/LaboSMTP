@@ -21,7 +21,9 @@ public class PrankGenerator {
     }
 
     public Prank generatePrank(){
-        return new Prank(generateGroup(),getRandomMessage());
+        Random rnd = new Random();
+        int index=rnd.nextInt(cm.getMessages().size());
+        return new Prank(generateGroup(), cm.getSubjects().get(index),cm.getMessages().get(index));
     }
 
     /**
@@ -43,9 +45,5 @@ public class PrankGenerator {
         return result;
     }
 
-    private String getRandomMessage(){
-        Random rnd = new Random();
-        int index=rnd.nextInt(cm.getMessages().size());
-        return cm.getMessages().get(index);
-    }
+
 }

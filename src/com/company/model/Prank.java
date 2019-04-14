@@ -9,10 +9,12 @@ import java.util.List;
  */
 public class Prank {
     private Group victims;
+    private String subject;
     private String message;
 
-    public Prank(Group victims, String message) {
+    public Prank(Group victims, String subject,String message) {
         this.victims = victims;
+        this.subject= subject;
         this.message = message;
     }
 
@@ -23,7 +25,7 @@ public class Prank {
     public List<Mail> generateMails(){
         List<Mail> mails= new ArrayList<Mail>();
         for (Person v: victims.getRecipients()) {
-            mails.add(new Mail(victims.getSender().getEmail(),v.getEmail(),"empty for now",message));
+            mails.add(new Mail(victims.getSender().getEmail(),v.getEmail(),subject,message));
         }
         return mails;
     }

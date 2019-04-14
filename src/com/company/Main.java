@@ -17,15 +17,21 @@ public class Main {
         PrankGenerator pg=new PrankGenerator();
 
         try {
-             ConfigManager cm= ConfigManager.getInstance();
+            ConfigManager cm= ConfigManager.getInstance();
             SMTPClient smtpClient= new SMTPClient(cm.getSmtpServerAddress(),cm.getSmtpServerPort());
-            Prank p= pg.generatePrank();
-            List<Mail> mails = p.generateMails();
-            for (Mail m:mails) {
-                smtpClient.sendMail(m);
+            for(int i= 0; i < cm.getNumberOfGroups();i++){
+              Prank p= pg.generatePrank();
 
+              List<Mail> mails = p.generateMails();
+
+              for (Mail m:mails) {
+                smtpClient.sendMail(m);
+              }
+            System.out.println(mails.size());
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
