@@ -14,6 +14,17 @@ public class Group {
         this.sender = sender;
     }
 
+    public Group() {
+    }
+
+    public void addRecipient(Person p){
+        recipients.add(p);
+    }
+
+    public void setSender(Person sender) {
+        this.sender = sender;
+    }
+
     public List<Person> getRecipients() {
         return recipients;
     }
