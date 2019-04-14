@@ -10,8 +10,11 @@ import java.util.Properties;
 /**
  * This class represent a parser for the config files, which create Adresses, Groups
  * and messages for the PrankGenerator.
+ * This class is a Singleton
  */
-public class ConfigManager {
+public final class ConfigManager {
+    private static ConfigManager instance;
+
     private final List<Person> persons;
     private final List<String> messages;
     private String smtpServerAddress;
@@ -19,10 +22,17 @@ public class ConfigManager {
     private ArrayList<Person> witnessesToCC;
     private int numberOfGroups;
 
-    public ConfigManager() throws IOException {
+    private ConfigManager() throws IOException {
         persons = parseAdress("adresses.txt");
         messages = parseMessages("messages.txt");
         parseConfig("config.properties");
+    }
+
+    public ConfigManager getInstance() throws IOException {
+        if(instance == null){
+            this.instance = new ConfigManager();
+        }
+        return instance;
     }
 
     public List<Person> getPersons() {
