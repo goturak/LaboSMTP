@@ -37,20 +37,21 @@ public class SMTPClient {
     }
     public void sendMail(Mail mail) throws IOException, InterruptedException {
         System.out.println("new mail");
+        Thread.sleep(30);
         System.out.println(sendMessage("MAIL FROM: "+mail.getFrom(),true));
-        Thread.sleep(20);
+        Thread.sleep(30);
         System.out.println(sendMessage("RCPT TO: "+mail.getTo(),true));
-        Thread.sleep(20);
+        Thread.sleep(30);
         System.out.println(sendMessage("DATA",true));
-        Thread.sleep(20);
+        Thread.sleep(30);
         sendMessage("From: "+mail.getFrom(),false);
-        Thread.sleep(20);
+        Thread.sleep(30);
         sendMessage("To: "+mail.getTo(),false);
-        Thread.sleep(20);
+        Thread.sleep(30);
         sendMessage("subject: "+ mail.getSubject()+"\n\n"+mail.getMessage(),false);
-        Thread.sleep(20);
+        Thread.sleep(30);
         System.out.println(sendMessage("\r\n.\r\n",true));
-        Thread.sleep(20);
+        Thread.sleep(30);
         out.flush();
         System.out.println("end of mail");
     }

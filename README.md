@@ -9,7 +9,7 @@ These are the instructions to setup a mock server using docker and MockMock:
   * $ docker build ./
 * After the image is built, you can see the image number after the message "Successfully built". Copy this number.
 * Now run the image using:
-  * $ docker run *image_number* 
+  * $ docker run -p 25:25 -p 8282:8282 *image_number* 
  
 These steps build a docker image on a new container. When the server is started, it copies the MockMock's jar and execute it.
  
@@ -25,3 +25,5 @@ The second one is *parseMessages*. This method follow a similar pattern, using t
 The last one, *parseConfig* uses the Properties package in java to parse specific field that we want our application to know.
 
 ##### PrankGenerator.java
+This class is used to generate a prank. It does so by generating a group by selecting victims among the all the victims parsed by the config manager and selecting a random from all available messages.
+

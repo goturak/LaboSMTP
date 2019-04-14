@@ -35,7 +35,7 @@ public final class ConfigManager {
         List<String>[] subjectMessages = parseMessages("./messages.txt");
         subjects = subjectMessages[0];
         messages = subjectMessages[1];
-        parseConfig("./src/com/company/config/config.properties");
+        parseConfig("./config.properties");
     }
 
     /**
