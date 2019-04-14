@@ -1,6 +1,7 @@
 package com.company.config;
 
 import com.company.model.Person;
+import jdk.internal.util.xml.impl.Pair;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public final class ConfigManager {
 
     private final List<Person> persons;
     private final List<String> messages;
+    private final List<String> subjects;
     private String smtpServerAddress;
     private int smtpServerPort;
     private ArrayList<Person> witnessesToCC;
@@ -30,7 +32,9 @@ public final class ConfigManager {
      */
     private ConfigManager() throws IOException {
         persons = parseAddress("./src/com/company/config/addresses.txt");
-        messages = parseMessages("./src/com/company/config/messages.txt");
+        List<String>[] subjectMessages = parseMessages("./src/com/company/config/messages.txt");
+        subjects = subjectMessages[0];
+        messages = subjectMessages[1];
         parseConfig("./src/com/company/config/config.properties");
     }
 
@@ -60,6 +64,14 @@ public final class ConfigManager {
      */
     public List<String> getMessages() {
         return messages;
+    }
+
+    /**
+     * Getter of the subjects listed in messages.txt
+     * @return Every subjects stored in messages.txt
+     */
+    public List<String> getSubjects() {
+        return subjects;
     }
 
     /**
@@ -145,16 +157,18 @@ public final class ConfigManager {
      * @return A list of string, with each entry being a message.
      * @throws IOException
      */
-    private List<String> parseMessages(String fileName) throws IOException {
-        List<String> messages;
+    private List<String>[] parseMessages(String fileName) throws IOException {
+        List<String> messages = new ArrayList<>();
+        List<String> subject = new ArrayList<>();
         try(FileInputStream stream = new FileInputStream(fileName)){
             InputStreamReader r = new InputStreamReader(stream);
             try(BufferedReader br = new BufferedReader(r)){
-                messages = new ArrayList<>();
+
                 String line = br.readLine();
                 while (line != null){
                     String message = "";
-
+                    subject.add(line);
+                    line = br.readLine();
                     //Messages are considered separated by "---"
                     while((line != null && !line.equals("---"))){
                         message += line;
@@ -166,6 +180,9 @@ public final class ConfigManager {
                 }
             }
         }
-        return messages;
+        List<String>[] result = new List[2];
+        result[0] = subject;
+        result[1] = messages;
+        return result;
     }
 }
