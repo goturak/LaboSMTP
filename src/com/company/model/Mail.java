@@ -1,41 +1,45 @@
 package com.company.model;
 
+import javax.security.auth.Subject;
+
 /**
  * Class containing all the necessary informatrions to send the fake mail
  * @author Luca Reis de Carvalho -Guillaume Vetter
  */
 public class Mail {
-    private String From;
-    private String To;
-    private String Data;
+    private String from;
+    private String to;
+    private String data;
+    private String subject;
 
-    public Mail(String from, String to, String data) {
-        From = from;
-        To = to;
-        Data = data;
+    public Mail(String from, String to, String subject, String data) {
+        this.from = from;
+        this.to = to;
+        this.data = data;
+        this.subject = subject;
     }
 
     public String getFrom() {
-        return From;
+        return from;
     }
 
     public void setFrom(String from) {
-        From = from;
+        from = from;
     }
 
     public String getTo() {
-        return To;
+        return to;
     }
 
     public void setTo(String to) {
-        To = to;
+        to = to;
     }
 
     public String getData() {
-        return Data;
+        return data;
     }
 
     public void setData(String data) {
-        Data = data;
+        data = data;
     }
 }
