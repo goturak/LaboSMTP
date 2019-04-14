@@ -1,7 +1,10 @@
 package com.company.model;
 
 import java.util.List;
-
+/**
+ * Class representing a group of victims with a list of recipients and a sender
+ * @author Luca Reis de Carvalho -Guillaume Vetter
+ */
 public class Group {
     private List<Person> recipients;
     private Person sender;

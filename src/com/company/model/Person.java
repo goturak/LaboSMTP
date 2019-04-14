@@ -1,5 +1,9 @@
 package com.company.model;
 
+/**
+ * Class representing a victim with an email
+ * @author Luca Reis de Carvalho -Guillaume Vetter
+ */
 public class Person {
     private String email;
 
