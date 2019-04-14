@@ -1,5 +1,9 @@
 .idea/
+
 *.iml
+
+out/
+
 src/com/compagny/config/adresses.txt
 src/com/compagny/config/group.txt
 src/com/compagny/config/messages.txt

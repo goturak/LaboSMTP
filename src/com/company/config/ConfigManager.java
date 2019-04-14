@@ -123,6 +123,7 @@ public final class ConfigManager {
         //For every person (separated by a comma), we store a new person in the list.
         this.witnessesToCC = new ArrayList<>();
         String field = p.getProperty("witnessesToCC");
+
         String[] witnesses = field.split(",");
         for(String w : witnesses){
             this.witnessesToCC.add(new Person(w));
@@ -186,3 +187,4 @@ public final class ConfigManager {
         return result;
     }
 }
+
