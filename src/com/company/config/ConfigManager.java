@@ -29,9 +29,9 @@ public final class ConfigManager {
      * @throws IOException
      */
     private ConfigManager() throws IOException {
-        persons = parseAddress("addresses.txt");
-        messages = parseMessages("messages.txt");
-        parseConfig("config.properties");
+        persons = parseAddress("./src/com/company/config/addresses.txt");
+        messages = parseMessages("./src/com/company/config/messages.txt");
+        parseConfig("./src/com/company/config/config.properties");
     }
 
     /**
@@ -39,9 +39,9 @@ public final class ConfigManager {
      * @return the current instance of ConfigManager, creating one if it doesnt exists.
      * @throws IOException
      */
-    public ConfigManager getInstance() throws IOException {
+    public static ConfigManager getInstance() throws IOException {
         if(instance == null){
-            this.instance = new ConfigManager();
+            instance = new ConfigManager();
         }
         return instance;
     }
@@ -105,7 +105,7 @@ public final class ConfigManager {
         Properties p = new Properties();
         p.load(stream);
         this.smtpServerAddress = p.getProperty("smtpServerAddress");
-        this.smtpServerPort = Integer.parseInt(p.getProperty("stmpServerPort"));
+        this.smtpServerPort = Integer.parseInt(p.getProperty("smtpServerPort"));
         this.numberOfGroups = Integer.parseInt(p.getProperty("numberOfGroups"));
 
         //For every person (separated by a comma), we store a new person in the list.
