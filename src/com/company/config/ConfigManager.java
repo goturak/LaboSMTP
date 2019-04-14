@@ -31,10 +31,8 @@ public final class ConfigManager {
      * @throws IOException
      */
     private ConfigManager() throws IOException {
-
-    
-        persons = parseAddress("./src/com/company/config/addresses.txt");
-        List<String>[] subjectMessages = parseMessages("./src/com/company/config/messages.txt");
+        persons = parseAddress("./addresses.txt");
+        List<String>[] subjectMessages = parseMessages("./messages.txt");
         subjects = subjectMessages[0];
         messages = subjectMessages[1];
         parseConfig("./src/com/company/config/config.properties");
