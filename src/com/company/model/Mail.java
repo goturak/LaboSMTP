@@ -7,6 +7,7 @@ package com.company.model;
 public class Mail {
     private String from;
     private String to;
+
     private String subject;
     private String message;
 
@@ -15,11 +16,12 @@ public class Mail {
         this.to = to;
         this.subject = subject;
         this.message=message;
-    }
+
 
     public String getFrom() {
         return from;
     }
+
 
 
     public String getTo() {
