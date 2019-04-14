@@ -14,6 +14,10 @@ These are the instructions to setup a mock server using docker and MockMock:
 These steps build a docker image on a new container. When the server is started, it copies the MockMock's jar and execute it.
  
 ### Instructions For Running a Prank Campaign
+The goal is to setup the correct config files:
+* The config file, with the address of the smtp server, the port on which we want to connect, the number of groups and every mail address we want to put in CC.
+* The addresses file, with every email address of the victims, one on each line.
+* The messages file, with every message we want to send, in which the first line is the subject, and the rest is the message. Messages are separated by "---".
 
 ### Most Important Classes
 ##### ConfigManager.java
